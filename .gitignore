@@ -1,0 +1,59 @@
+# Build
+build/
+install/
+log/
+out/
+
+# ROS 2
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# C/C++
+*.o
+*.a
+*.so
+*.elf
+*.bin
+*.hex
+*.map
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.bak
+*~
+
+# ROS bags
+*.bag
+*.db3
+
+# AI large files
+*.pt
+*.pth
+*.onnx
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Generated files
+docs/generated/
+simulation/generated/
