@@ -1,140 +1,153 @@
-# Autonomous AI-Powered Hospital Delivery & Infection-Control Robot
+# AI and Computer Vision Subsystem
 
-## 1. Project Overview
+## 1. Overview
 
-This project aims to develop an autonomous mobile robot that transports authorized items between hospital departments, rooms, and designated locations.
+The AI subsystem processes supported visual or other model inputs and produces structured results for the robot's higher-level software.
 
-The robot is designed to reduce repetitive transportation tasks and unnecessary staff movement, especially during deliveries to designated isolation areas.
+Depending on the selected requirements, this subsystem may support object detection or other perception features. It must not be treated as the sole mechanism for immediate motor safety.
 
-The system combines robotics, embedded systems, artificial intelligence, computer vision, and a monitoring dashboard.
+## 2. Responsibilities
 
-**Project Status:** Planning and Requirements Definition
+* Manage dataset documentation.
+* Define data preprocessing.
+* Train and evaluate selected models.
+* Export and version model artifacts.
+* Run inference on the target computer.
+* Convert model outputs into documented application data.
+* Report inference errors and performance limitations.
 
-## 2. Main Objectives
+## 3. Suggested Directory Structure
 
-* Develop autonomous indoor navigation.
-* Build maps of the operating environment using SLAM.
-* Detect and avoid obstacles.
-* Transport authorized items securely.
-* Monitor and track delivery missions.
-* Develop a custom lightweight RTOS for the STM32 low-level control subsystem.
-* Integrate ROS 2 with the embedded controller through CAN communication.
-* Demonstrate an isolation-area delivery and controlled cleaning workflow.
-* Develop a simulated multi-floor operation using an elevator prototype or simulation.
+```text
+ai/
+├── README.md
+├── datasets/
+│   └── README.md
+├── models/
+│   └── README.md
+├── training/
+│   └── README.md
+└── inference/
+    ├── README.md
+    ├── inference.py
+    └── detector.py
+```
 
-## 3. System Architecture
+This structure is proposed. Match it to the files actually present in the repository.
 
-### High-Level Control
+## 4. `datasets/`
 
-**Main Computer:** Raspberry Pi 4 (planned)
+**Purpose:** Documents the datasets used to develop and evaluate AI models.
 
-Responsibilities:
+**Input:**
 
-* Linux operating system.
-* ROS 2 middleware.
-* SLAM and localization.
-* Navigation and path planning.
-* AI-based perception.
-* Mission management.
-* Dashboard communication.
+* Approved images or other data.
+* Labels and annotations.
+* Dataset source and license information.
 
-### Low-Level Control
+**Output:**
 
-**Microcontroller:** STM32F401RCT6 (planned)
+* Documented dataset organization.
+* Label definitions.
+* Training, validation, and test split information.
 
-Responsibilities:
+The dataset documentation must identify data provenance, permitted usage, annotation format, and known limitations. Do not commit large or restricted datasets without confirming licensing and repository policy.
 
-* Motor control and PID.
-* Wheel encoder processing.
-* Sensor interfacing.
-* Battery monitoring.
-* CAN communication.
-* Custom RTOS task scheduling.
-* Watchdog and fault handling.
-* Emergency-stop monitoring and safety-related control.
+## 5. `models/`
 
-### Communication
+**Purpose:** Documents trained models and their deployment requirements.
 
-CAN Bus is the planned communication interface between the Raspberry Pi subsystem and the STM32 controller. The protocol, message identifiers, data formats, and update rates must be defined and tested before integration.
+**Input:**
 
-## 4. Planned Technologies
+* Training configuration.
+* Dataset version.
+* Model architecture.
+* Training and evaluation results.
 
-* C and Embedded C
-* C++
-* Python
-* STM32
-* Custom lightweight RTOS
-* Linux
-* ROS 2
-* Nav2
-* SLAM
-* Computer Vision
-* CAN Bus
-* Simulation tools
-* Web dashboard and database
+**Output:**
 
-The final versions and dependencies will be selected during the design phase.
+* Model artifacts or references to their storage.
+* Model version information.
+* Input/output specifications.
+* Deployment requirements.
 
-## 5. Main Features
+Each model must document its expected input shape, color format, normalization, supported classes, output format, and known limitations.
 
-* Autonomous indoor navigation.
-* Obstacle detection and avoidance.
-* Secure delivery compartment.
-* Delivery verification and tracking.
-* Mission management dashboard.
-* Robot status and battery monitoring.
-* Isolation-area delivery workflow.
-* Controlled cleaning workflow.
-* Elevator prototype or simulation.
-* Fault detection and safe-stop behavior.
-* Charging dock concept.
+## 6. `training/`
 
-Features will be considered complete only after implementation and testing.
+**Purpose:** Contains training and evaluation code where training is part of the project.
 
-## 6. Repository Structure
+**Input:**
 
-* `docs/`: Requirements, architecture, research, design, and testing documentation.
-* `hardware/`: Mechanical design, electronics, wiring, and bill of materials.
-* `firmware/`: STM32 application, drivers, custom RTOS, and safety modules.
-* `ros2/`: ROS 2 packages, navigation, SLAM, mission management, and communication.
-* `ai/`: Dataset documentation, model training, and inference.
-* `dashboard/`: Frontend, backend, and database.
-* `simulation/`: Simulated robot and hospital environment.
-* `tests/`: Unit, integration, hardware, simulation, and system tests.
-* `assets/`: Project images, diagrams, and visual materials.
-* `releases/`: Release documentation and test evidence.
+* Dataset and annotation paths.
+* Training configuration.
+* Model architecture.
+* Training parameters.
 
-## 7. Development Workflow
+**Output:**
 
-1. Research existing solutions.
-2. Collect environmental and operational requirements.
-3. Define system interfaces and architecture.
-4. Finalize preliminary mechanical and electrical designs.
-5. Develop and test software modules.
-6. Build the simulation environment.
-7. Integrate the hardware and software subsystems.
-8. Validate the complete prototype.
+* Trained model checkpoints.
+* Training metrics.
+* Evaluation results.
+* Exported deployment artifacts where supported.
 
-## 8. Scope and Limitations
+Training and evaluation must use documented dataset splits to reduce the risk of misleading results.
 
-The initial system is a controlled-environment prototype, not a certified medical device. It will not diagnose patients or make clinical decisions. Elevator integration will use a simulation or prototype unless an authorized interface is available. Cleaning demonstrations do not establish medical-grade disinfection.
+## 7. `inference/inference.py`
 
-## 9. Team Collaboration
+**Purpose:** Provides an inference entry point or coordinates the inference workflow.
 
-Each subsystem must have a responsible owner. Teams must agree on interfaces, units, message formats, dependencies, and testing criteria before cross-team integration.
+**Input:**
 
-## 10. Current Status
+* Image, video frame, or camera input.
+* Model path.
+* Inference configuration.
 
-The repository currently provides a planned structure for development. The existence of a source file or configuration file does not mean that the associated functionality has been implemented or validated.
+**Output:**
 
-## 11. Documentation Rules
+* Inference results in the documented format.
+* Processing status and error information.
+* Optional performance measurements.
 
-* Update documentation when interfaces or requirements change.
-* Record assumptions and unresolved decisions.
-* Document code inputs, outputs, dependencies, and error handling.
-* Do not commit credentials or private hospital/patient information.
-* Do not claim test results without recorded evidence.
+The exact interface must be defined by the implementation.
 
-## 12. License
+## 8. `inference/detector.py`
 
-The project license and rules for external contributions must be confirmed by the project team before public redistribution.
+**Purpose:** Provides the object-detection interface if object detection is selected.
+
+**Input:**
+
+* Image or frame in the documented format.
+* Model or inference-engine reference.
+* Confidence and detection configuration.
+
+**Output:**
+
+* Detected class labels.
+* Confidence scores.
+* Bounding boxes or other model outputs.
+* Empty detection results when no valid detections are produced.
+* Error status when inference fails.
+
+The detector must document coordinate conventions, image dimensions, confidence interpretation, and any postprocessing performed.
+
+## 9. AI-to-Robot Interface
+
+The AI subsystem should return structured perception results. The ROS 2 or application layer determines how those results are used.
+
+AI results must not directly bypass firmware command validation, motion limits, or the robot's defined safety mechanisms.
+
+## 10. Testing and Evaluation
+
+Tests should document:
+
+* Model version.
+* Dataset version.
+* Supported classes.
+* Precision and recall where applicable.
+* False-positive and false-negative behavior.
+* Inference latency on the target computer.
+* Memory and compute requirements.
+* Behavior under poor lighting or unfamiliar scenes.
+
+A model is ready for integration only when its output format, performance limits, and failure behavior are documented.
