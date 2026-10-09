@@ -1,43 +1,56 @@
-# Firmware
+# Firmware Subsystem
 
-## Overview
+## 1. Purpose
 
-This directory contains the low-level firmware responsible for real-time control, hardware interaction, and safety-critical operations.
+This directory contains the embedded software responsible for low-level robot control, peripheral interfacing, communication, and safety-related functions.
 
-The firmware runs on the STM32 microcontroller and communicates with the high-level robot software through defined interfaces such as CAN.
+The firmware is planned for the STM32F401RCT6 microcontroller.
 
-## Responsibilities
+## 2. Responsibilities
 
 * Initialize and configure the microcontroller.
-* Integrate the custom RTOS.
-* Control motors and read encoder feedback.
-* Interface with sensors and electronic modules.
-* Implement communication protocols.
-* Monitor faults and safety conditions.
-* Provide a stable interface to the ROS 2 computer.
+* Interface with sensors and actuators.
+* Control motors using feedback from wheel encoders.
+* Exchange commands and telemetry with the high-level computer.
+* Run the custom lightweight RTOS.
+* Monitor defined faults and communication timeouts.
+* Implement and test low-level safety behavior.
 
-## Directory Structure
+## 3. Planned Structure
 
-* `bootloader/`: Optional firmware update and boot management.
-* `stm32/`: STM32 application, drivers, RTOS, communication, and control modules.
+* `bootloader/`: Optional bootloader and firmware-update support.
+* `stm32/`: STM32 application and hardware-dependent modules.
 
-## Execution Model
+## 4. Inputs
 
-The firmware is responsible for predictable, time-sensitive tasks. ROS 2 handles high-level navigation and mission planning, while the STM32 handles low-level execution and local safety responses.
+* Validated motion commands from the high-level computer.
+* Encoder feedback and sensor measurements.
+* Battery and fault-monitoring signals.
+* Configuration parameters.
+* RTOS scheduling and timing services.
 
-## Development Rules
+## 5. Outputs
 
-* Keep hardware-dependent code separate from application logic.
-* Use clear interfaces between modules.
+* Motor-driver control signals.
+* Sensor measurements and system status.
+* CAN messages containing telemetry and fault information.
+* Fault responses and safe-state transitions.
+* Diagnostic information for debugging.
+
+## 6. Design Principles
+
+* Separate hardware drivers from application logic.
+* Validate incoming commands before execution.
 * Avoid blocking operations in time-critical tasks.
-* Document interrupt and shared-data behavior.
-* Check return values and handle hardware failures.
-* Never assume a command from the onboard computer is always valid.
+* Use bounded buffers and explicit timeout handling.
+* Protect shared resources against concurrent access.
+* Keep interrupt service routines short and predictable.
+* Document timing requirements for real-time tasks.
 
-## Testing
+## 7. Testing
 
-Use host-side unit tests where possible, cross-compilation, static analysis, and hardware tests on the STM32.
+Test drivers individually before integrating them with the RTOS and application. Use a bench setup before testing physical robot movement.
 
-## Definition of Done
+## 8. Current Status
 
-Firmware changes must compile for the selected target, pass applicable tests, document their interfaces, and preserve safe behavior when communication or hardware fails.
+The directory defines the planned firmware responsibilities. Actual implementation and supported peripherals must be documented as they become available.
