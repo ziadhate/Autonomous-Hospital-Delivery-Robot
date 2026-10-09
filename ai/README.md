@@ -2,152 +2,197 @@
 
 ## 1. Overview
 
-The AI subsystem processes supported visual or other model inputs and produces structured results for the robot's higher-level software.
+The `ai/` directory contains the Artificial Intelligence (AI) and Computer Vision components of the Autonomous Hospital Delivery Robot.
 
-Depending on the selected requirements, this subsystem may support object detection or other perception features. It must not be treated as the sole mechanism for immediate motor safety.
+The subsystem processes visual input, detects relevant objects, and provides structured perception results to the robot's higher-level software.
 
-## 2. Responsibilities
+Potential applications include person detection, obstacle recognition, and identifying objects relevant to the robot's operating environment. The final supported tasks depend on the selected model and validated dataset.
 
-* Manage dataset documentation.
-* Define data preprocessing.
-* Train and evaluate selected models.
-* Export and version model artifacts.
-* Run inference on the target computer.
-* Convert model outputs into documented application data.
-* Report inference errors and performance limitations.
+The AI subsystem supports robot perception. It does not replace the independent safety mechanisms responsible for stopping the robot.
 
-## 3. Suggested Directory Structure
+## 2. Directory Structure
 
 ```text
 ai/
 ├── README.md
 ├── datasets/
-│   └── README.md
 ├── models/
-│   └── README.md
-├── training/
-│   └── README.md
-└── inference/
-    ├── README.md
-    ├── inference.py
-    └── detector.py
+├── object_detection/
+│   ├── detector.py
+│   ├── preprocessing.py
+│   └── postprocessing.py
+├── inference/
+│   ├── detector.py
+│   └── inference.py
+└── training/
+    ├── train.py
+    ├── evaluate.py
+    └── requirements.txt
 ```
 
-This structure is proposed. Match it to the files actually present in the repository.
+## 3. Directory Responsibilities
 
-## 4. `datasets/`
+### `datasets/`
 
-**Purpose:** Documents the datasets used to develop and evaluate AI models.
+Documents and organizes the datasets used for model development.
 
-**Input:**
+Responsibilities:
 
-* Approved images or other data.
-* Labels and annotations.
-* Dataset source and license information.
+* Record dataset sources and licenses.
+* Define supported object classes.
+* Document annotation formats.
+* Track training, validation, and test splits.
+* Record dataset limitations and versions.
 
-**Output:**
+**Input:** Images, annotations, class definitions, and dataset metadata.
 
-* Documented dataset organization.
-* Label definitions.
-* Training, validation, and test split information.
+**Output:** Organized and documented data suitable for training and evaluation.
 
-The dataset documentation must identify data provenance, permitted usage, annotation format, and known limitations. Do not commit large or restricted datasets without confirming licensing and repository policy.
+### `models/`
 
-## 5. `models/`
+Documents trained model artifacts and their deployment requirements.
 
-**Purpose:** Documents trained models and their deployment requirements.
+Responsibilities:
 
-**Input:**
+* Track model versions.
+* Record model architecture and configuration.
+* Document expected input and output formats.
+* Record evaluation results and known limitations.
+* Explain how model artifacts are obtained.
 
-* Training configuration.
-* Dataset version.
-* Model architecture.
-* Training and evaluation results.
+**Input:** Trained checkpoints, exported models, and experiment metadata.
 
-**Output:**
+**Output:** Versioned model artifacts and deployment documentation.
 
-* Model artifacts or references to their storage.
-* Model version information.
-* Input/output specifications.
-* Deployment requirements.
+### `object_detection/`
 
-Each model must document its expected input shape, color format, normalization, supported classes, output format, and known limitations.
+Contains reusable object-detection processing components.
 
-## 6. `training/`
+#### `preprocessing.py`
 
-**Purpose:** Contains training and evaluation code where training is part of the project.
+Prepares input images for the selected model.
 
-**Input:**
+**Input:** Raw image or frame.
 
-* Dataset and annotation paths.
-* Training configuration.
-* Model architecture.
-* Training parameters.
+**Output:** Model-compatible image or tensor.
 
-**Output:**
+Possible operations include resizing, color conversion, normalization, and tensor formatting. Only operations required by the selected model should be implemented.
 
-* Trained model checkpoints.
-* Training metrics.
-* Evaluation results.
-* Exported deployment artifacts where supported.
+#### `detector.py`
 
-Training and evaluation must use documented dataset splits to reduce the risk of misleading results.
+Provides the object-detection logic for the selected model.
 
-## 7. `inference/inference.py`
+**Input:** Prepared image or model-compatible tensor, model configuration, and supported inference options.
 
-**Purpose:** Provides an inference entry point or coordinates the inference workflow.
+**Output:** Raw or partially processed model predictions.
 
-**Input:**
+The exact interface must be documented in the implementation.
 
-* Image, video frame, or camera input.
-* Model path.
-* Inference configuration.
+#### `postprocessing.py`
 
-**Output:**
+Converts raw predictions into a consistent application-level format.
 
-* Inference results in the documented format.
-* Processing status and error information.
-* Optional performance measurements.
+**Input:** Model predictions, class information, and postprocessing configuration.
 
-The exact interface must be defined by the implementation.
+**Output:** Structured detections, potentially including class labels, confidence scores, and bounding-box coordinates.
 
-## 8. `inference/detector.py`
+Postprocessing may include confidence filtering, coordinate conversion, and duplicate-detection filtering when required by the model.
 
-**Purpose:** Provides the object-detection interface if object detection is selected.
+### `inference/`
 
-**Input:**
+Contains the inference workflow used to execute a trained model.
 
-* Image or frame in the documented format.
-* Model or inference-engine reference.
-* Confidence and detection configuration.
+#### `inference.py`
 
-**Output:**
+Acts as the inference entry point or coordinates the inference workflow.
 
-* Detected class labels.
-* Confidence scores.
-* Bounding boxes or other model outputs.
-* Empty detection results when no valid detections are produced.
-* Error status when inference fails.
+**Input:** Supported image or frame source, model configuration, and runtime options.
 
-The detector must document coordinate conventions, image dimensions, confidence interpretation, and any postprocessing performed.
+**Output:** Prediction results, processing status, and relevant error information.
 
-## 9. AI-to-Robot Interface
+#### `detector.py`
 
-The AI subsystem should return structured perception results. The ROS 2 or application layer determines how those results are used.
+Provides the detector interface used by the inference workflow.
 
-AI results must not directly bypass firmware command validation, motion limits, or the robot's defined safety mechanisms.
+**Input:** Model-ready image data and detector configuration.
 
-## 10. Testing and Evaluation
+**Output:** Detection results in the format agreed upon by the AI and ROS 2 teams.
 
-Tests should document:
+The distinction between `object_detection/detector.py` and `inference/detector.py` must remain clear. The former should contain reusable detection logic, while the latter should expose or adapt the detector for the inference workflow, unless the implementation defines a different separation.
 
-* Model version.
-* Dataset version.
-* Supported classes.
-* Precision and recall where applicable.
-* False-positive and false-negative behavior.
-* Inference latency on the target computer.
-* Memory and compute requirements.
-* Behavior under poor lighting or unfamiliar scenes.
+### `training/`
 
-A model is ready for integration only when its output format, performance limits, and failure behavior are documented.
+Contains the scripts and dependencies required to train and evaluate models.
+
+#### `train.py`
+
+**Input:** Training dataset, model configuration, hyperparameters, and training options.
+
+**Output:** Trained model checkpoints, training logs, and experiment results.
+
+#### `evaluate.py`
+
+**Input:** Trained model, evaluation dataset, and evaluation configuration.
+
+**Output:** Evaluation metrics and reports.
+
+Metrics depend on the selected task and may include precision, recall, and mean Average Precision (mAP) for object detection.
+
+#### `requirements.txt`
+
+Lists the Python packages required by the training scripts.
+
+**Input:** Dependency definitions.
+
+**Output:** A reproducible Python dependency installation specification.
+
+## 4. Overall Data Flow
+
+1. A camera or another approved source provides an image or frame.
+2. Preprocessing converts the image into the model's expected input format.
+3. The selected model performs inference.
+4. Postprocessing converts predictions into structured detections.
+5. The result is exposed to the consuming application.
+6. The ROS 2 perception layer may use the detections for obstacle or person-awareness tasks.
+
+Training and evaluation are development workflows; they do not need to run on the robot during normal operation.
+
+## 5. Inputs and Outputs
+
+| Component          | Main Input                    | Main Output            |
+| ------------------ | ----------------------------- | ---------------------- |
+| Datasets           | Images and annotations        | Organized labeled data |
+| Training           | Dataset and configuration     | Trained model          |
+| Evaluation         | Model and test data           | Metrics and report     |
+| Preprocessing      | Raw image                     | Model-ready input      |
+| Detection          | Model-ready input             | Predictions            |
+| Postprocessing     | Raw predictions               | Structured detections  |
+| Inference workflow | Image and model configuration | Final inference result |
+
+## 6. Integration Requirements
+
+* Agree on a common detection-result format.
+* Document image dimensions and color-channel conventions.
+* Define confidence thresholds and coordinate conventions.
+* Record model dependencies and target hardware requirements.
+* Avoid assuming a model is real-time capable before measuring its performance.
+* Do not use AI predictions as the only mechanism for emergency stopping.
+
+## 7. Testing
+
+The subsystem should be tested for:
+
+* Model loading and invalid model paths.
+* Valid and invalid image inputs.
+* Correct preprocessing dimensions and format.
+* Correct output structure.
+* Confidence-threshold behavior.
+* Detection quality on a held-out dataset.
+* Inference latency and memory consumption.
+* Failure handling when the model or runtime is unavailable.
+
+## 8. Completion Criteria
+
+The AI subsystem is ready for integration when the model version, dependencies, input/output format, evaluation results, performance measurements, and known limitations are documented.
+
+Only features implemented and tested in the repository should be described as completed.
