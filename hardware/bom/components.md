@@ -73,24 +73,7 @@
 | Dashboard | Mission management, robot status, alerts, and delivery tracking |
 | Face Display | Animated expressions and user interaction |
 
-## 6. Important Engineering Notes
 
-- **Prices:** All listed prices are preliminary estimates in EGP, not confirmed supplier quotations.
-- **TBD:** The price has not yet been determined.
-- **CAN compatibility:** The STM32F401RCT6 does not include a built-in CAN controller. An external controller may be required. A CAN transceiver alone is not sufficient.
-- **Emergency stop:** The emergency-stop circuit should stop hazardous robot motion independently of the main software.
-- **Power sizing:** Select the battery, BMS, motor driver, wiring, fuses, and converters according to the motors' current requirements and the complete system load.
-- **Display planning:** Confirm whether the robot face display can also serve as the optional touchscreen to avoid purchasing two displays unnecessarily.
-- **Camera planning:** Confirm whether the main camera and face camera have separate functions before purchasing both.
-- **Final purchasing:** Verify component specifications, interfaces, availability, and supplier quotations before ordering.
-
-## 7. Purchasing Status
-
-| Status | Meaning |
-|---|---|
-| Planned | Component is included in the proposed design |
-| To Be Confirmed | Compatibility or specification needs verification |
-| Price TBD | Supplier price has not been collected |
 | Approved | Component has been reviewed and approved for purchase |
 
 **Document Status:** Preliminary BOM — Pending Technical Review and Supplier Quotations.
