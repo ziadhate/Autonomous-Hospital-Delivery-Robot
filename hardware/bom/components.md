@@ -2,7 +2,7 @@
 
 ## Autonomous AI-Powered Hospital Delivery & Infection-Control Robot
 
-This document contains the proposed hardware components required to build the robot prototype. All prices are estimated in Egyptian Pounds (EGP) and should be verified with suppliers before purchasing.
+
 
 ## 1. Main Electronics and Sensors
 
