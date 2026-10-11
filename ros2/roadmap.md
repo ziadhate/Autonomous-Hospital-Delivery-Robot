@@ -1,5 +1,5 @@
 # ROS 2 Development Roadmap — Hospital Delivery Robot
-
+## Note:to put Checkmark put X in the bracket
 ## Phase 00 — Project Audit & Architecture
 
 - [ ] Confirm ROS 2 distribution and Ubuntu version
