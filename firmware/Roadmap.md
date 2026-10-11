@@ -36,7 +36,7 @@ Review the existing repository, verify the target hardware, identify missing and
 
 ## Implementation Tasks
 
-- [ * ] Confirm the exact STM32 MCU and development board.
+- [x] Confirm the exact STM32 MCU and development board.
 - [ ] Identify the compiler and build environment.
 - [ ] Determine whether the project uses HAL, CMSIS, LL, or bare-metal drivers.
 - [ ] Locate startup code, linker scripts, and device-specific dependencies.
