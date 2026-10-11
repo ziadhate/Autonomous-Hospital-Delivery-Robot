@@ -1,7 +1,7 @@
 # STM32 Firmware Development Roadmap
 ## Autonomous Hospital Delivery Robot
 
-##Note:to put Checkmark put X in the bracket
+## Note:to put Checkmark put X in the bracket
 
 ## Project Overview
 
