@@ -1,6 +1,8 @@
 # STM32 Firmware Development Roadmap
 ## Autonomous Hospital Delivery Robot
 
+##Note:to put Checkmark put X in the bracket
+
 ## Project Overview
 
 This document defines the complete development roadmap for the STM32 firmware of the Autonomous Hospital Delivery Robot.
