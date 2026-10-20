@@ -39,27 +39,27 @@ Review the existing repository, verify the target hardware, identify missing and
 ## Implementation Tasks
 
 - [x] Confirm the exact STM32 MCU and development board.
-- [ ] Identify the compiler and build environment.
-- [ ] Determine whether the project uses HAL, CMSIS, LL, or bare-metal drivers.
-- [ ] Locate startup code, linker scripts, and device-specific dependencies.
-- [ ] Review all existing source and header files.
-- [ ] Identify duplicated or overlapping implementations.
-- [ ] Define module responsibilities and interfaces.
-- [ ] Document hardware and software dependencies.
-- [ ] Establish a development and testing plan.
+- [x] Identify the compiler and build environment.
+- [x] Determine whether the project uses HAL, CMSIS, LL, or bare-metal drivers.
+- [x] Locate startup code, linker scripts, and device-specific dependencies.
+- [x] Review all existing source and header files.
+- [x] Identify duplicated or overlapping implementations.
+- [x] Define module responsibilities and interfaces.
+- [x] Document hardware and software dependencies.
+- [x] Establish a development and testing plan.
 
 ## Testing and Validation
 
-- [ ] Verify the repository structure.
-- [ ] Inspect build configuration and source dependencies.
-- [ ] Produce a list of missing, incomplete, and duplicated components.
+- [x] Verify the repository structure.
+- [x] Inspect build configuration and source dependencies.
+- [x] Produce a list of missing, incomplete, and duplicated components.
 
 ## Acceptance Criteria
 
-- [ ] Target hardware is identified.
-- [ ] Existing architecture is documented.
-- [ ] Duplicate implementations have a resolution plan.
-- [ ] Implementation dependencies are understood.
+- [x] Target hardware is identified.
+- [x] Existing architecture is documented.
+- [x] Duplicate implementations have a resolution plan.
+- [x] Implementation dependencies are understood.
 
 ---
 
@@ -85,33 +85,33 @@ Establish a reproducible firmware build system and verify the target MCU, compil
 
 ## Implementation Tasks
 
-- [ ] Verify the target MCU and compiler toolchain.
-- [ ] Configure CPU architecture, FPU, ABI, and compiler options.
-- [ ] Configure include directories and source files.
-- [ ] Verify startup code and the interrupt vector table.
-- [ ] Verify the linker script and memory regions.
-- [ ] Configure clock and system initialization.
-- [ ] Centralize hardware and system configuration.
-- [ ] Remove duplicate source entries.
-- [ ] Enable useful compiler warnings.
-- [ ] Document clean build and flashing procedures.
+- [x] Verify the target MCU and compiler toolchain.
+- [x] Configure CPU architecture, FPU, ABI, and compiler options.
+- [x] Configure include directories and source files.
+- [x] Verify startup code and the interrupt vector table.
+- [x] Verify the linker script and memory regions.
+- [x] Configure clock and system initialization.
+- [x] Centralize hardware and system configuration.
+- [x] Remove duplicate source entries.
+- [x] Enable useful compiler warnings.
+- [x] Document clean build and flashing procedures.
 
 ## Testing and Validation
 
-- [ ] Perform a clean CMake configuration.
-- [ ] Build from a fresh build directory.
-- [ ] Resolve compilation and linker errors.
-- [ ] Inspect ELF sections and memory usage.
-- [ ] Verify the firmware output format.
-- [ ] Run a basic startup or heartbeat test on hardware.
+- [x] Perform a clean CMake configuration.
+- [x] Build from a fresh build directory.
+- [x] Resolve compilation and linker errors.
+- [x] Inspect ELF sections and memory usage.
+- [x] Verify the firmware output format.
+- [x] Run a basic startup or heartbeat test on hardware.
 
 ## Acceptance Criteria
 
-- [ ] A clean build succeeds.
-- [ ] The correct target MCU is selected.
-- [ ] Required source files are included exactly once.
-- [ ] Memory addresses match the linker configuration.
-- [ ] Build instructions are documented.
+- [x] A clean build succeeds.
+- [x] The correct target MCU is selected.
+- [x] Required source files are included exactly once.
+- [x] Memory addresses match the linker configuration.
+- [x] Build instructions are documented.
 
 ---
 
