@@ -273,12 +273,12 @@ The team must select one authoritative implementation for each module and avoid 
 
 ## Implementation Tasks
 
-- [ ] Define the motor driver interface.
-- [ ] Configure motor direction and PWM control.
-- [ ] Define motor enable, disable, and stop behavior.
-- [ ] Implement encoder counting.
-- [ ] Define encoder resolution and conversion factors.
-- [ ] Calculate speed or position from encoder feedback.
+- [x] Define the motor driver interface.
+- [x] Configure motor direction and PWM control.
+- [x] Define motor enable, disable, and stop behavior.
+- [x] Implement encoder counting.
+- [x] Define encoder resolution and conversion factors.
+- [x] Calculate speed or position from encoder feedback.
 - [ ] Implement the PID controller.
 - [ ] Define PID sample time and output limits.
 - [ ] Implement integral anti-windup where required.
@@ -322,11 +322,11 @@ Acquire and validate sensor and battery data for use by the robot application.
 
 ## Implementation Tasks
 
-- [ ] Confirm sensor models and communication interfaces.
-- [ ] Document measurement units and operating ranges.
-- [ ] Implement IMU initialization and data acquisition.
-- [ ] Implement battery measurement and scaling.
-- [ ] Define sensor update rates.
+- [x] Confirm sensor models and communication interfaces.
+- [x] Document measurement units and operating ranges.
+- [x] Implement IMU initialization and data acquisition.
+- [x] Implement battery measurement and scaling.
+- [x] Define sensor update rates.
 - [ ] Track measurement validity and freshness.
 - [ ] Detect stale, unavailable, or out-of-range readings.
 - [ ] Integrate validated data with the robot state.
