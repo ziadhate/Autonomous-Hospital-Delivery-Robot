@@ -142,16 +142,16 @@ Implement and validate the low-level drivers required to access STM32 peripheral
 
 ### GPIO
 
-- [ ] Configure digital inputs and outputs.
-- [ ] Implement required read, write, and toggle operations.
-- [ ] Define pin ownership and safe output states.
+- [x] Configure digital inputs and outputs.
+- [x] Implement required read, write, and toggle operations.
+- [x] Define pin ownership and safe output states.
 
 ### Timers and PWM
 
-- [ ] Configure timer counters and prescalers.
-- [ ] Configure interrupts where required.
-- [ ] Implement PWM initialization and duty-cycle control.
-- [ ] Verify frequency and duty-cycle limits.
+- [x] Configure timer counters and prescalers.
+- [x] Configure interrupts where required.
+- [x] Implement PWM initialization and duty-cycle control.
+- [x] Verify frequency and duty-cycle limits.
 
 ### UART
 
