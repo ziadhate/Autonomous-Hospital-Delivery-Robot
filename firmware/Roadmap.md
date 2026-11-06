@@ -322,11 +322,11 @@ Acquire and validate sensor and battery data for use by the robot application.
 
 ## Implementation Tasks
 
-- [x] Confirm sensor models and communication interfaces.
-- [x] Document measurement units and operating ranges.
-- [x] Implement IMU initialization and data acquisition.
-- [x] Implement battery measurement and scaling.
-- [x] Define sensor update rates.
+- [ ] Confirm sensor models and communication interfaces.
+- [ ] Document measurement units and operating ranges.
+- [ ] Implement IMU initialization and data acquisition.
+- [ ] Implement battery measurement and scaling.
+- [ ] Define sensor update rates.
 - [ ] Track measurement validity and freshness.
 - [ ] Detect stale, unavailable, or out-of-range readings.
 - [ ] Integrate validated data with the robot state.
