@@ -273,12 +273,12 @@ The team must select one authoritative implementation for each module and avoid 
 
 ## Implementation Tasks
 
-- [x] Define the motor driver interface.
-- [x] Configure motor direction and PWM control.
-- [x] Define motor enable, disable, and stop behavior.
-- [x] Implement encoder counting.
-- [x] Define encoder resolution and conversion factors.
-- [x] Calculate speed or position from encoder feedback.
+- [ ] Define the motor driver interface.
+- [ ] Configure motor direction and PWM control.
+- [ ] Define motor enable, disable, and stop behavior.
+- [ ] Implement encoder counting.
+- [ ] Define encoder resolution and conversion factors.
+- [ ] Calculate speed or position from encoder feedback.
 - [ ] Implement the PID controller.
 - [ ] Define PID sample time and output limits.
 - [ ] Implement integral anti-windup where required.
