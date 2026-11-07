@@ -1,0 +1,12 @@
+﻿ai/README.md
+ai/datasets/README.md
+ai/inference/detector.py
+ai/inference/inference.py
+ai/models/README.md
+ai/object_detection/detector.py
+ai/object_detection/postprocessing.py
+ai/object_detection/preprocessing.py
+ai/roadmap.md
+ai/training/evaluate.py
+ai/training/requirements.txt
+ai/training/train.py
