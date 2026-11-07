@@ -2,13 +2,13 @@
 ## Note:to put Checkmark put X in the bracket
 ## Phase 00 — AI Module Audit & Requirements
 
-- [ ] Review the existing AI directory structure
-- [ ] Define the AI module scope and responsibilities
-- [ ] Identify required detection classes
-- [ ] Define the input sources: camera, image, or video
-- [ ] Define expected model outputs
-- [ ] Define the target hardware and runtime constraints
-- [ ] Document the interface between AI and ROS 2
+- [x] Review the existing AI directory structure
+- [x] Define the AI module scope and responsibilities
+- [x] Identify required detection classes
+- [x] Define the input sources: camera, image, or video
+- [x] Define expected model outputs
+- [x] Define the target hardware and runtime constraints
+- [x] Document the interface between AI and ROS 2
 
 **Acceptance Criteria:** AI requirements, detection classes, input formats, and integration interfaces are documented.
 
