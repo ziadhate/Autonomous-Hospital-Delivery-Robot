@@ -1,7 +1,10 @@
 #ifndef BATTERY_H
 #define BATTERY_H
 #include "robot_state.h"
+#ifndef BATTERY_HOST_TEST
 #include "main.h"
+extern ADC_HandleTypeDef hadc1;
+#endif
 
 /* ---- Hardware config: EDIT TO MATCH YOUR BOARD / PACK / BMS ----------
  * Divider: Vadc = Vpack * R_BOT / (R_TOP + R_BOT)
@@ -22,7 +25,6 @@
 #define BATT_CELL_CRIT_V        3.30f       /* stop motion (> BMS cutoff) */
 #define BATT_HYSTERESIS_V       0.05f       /* per cell               */
 
-extern ADC_HandleTypeDef hadc1;             /* from CubeMX */
 
 void battery_init(void);
 /* Samples ADC, scales, classifies. Returns the new reading. */

@@ -10,21 +10,54 @@ float battery_counts_to_pack_v(float counts)
     return v_adc * (BATT_DIV_R_TOP_OHM + BATT_DIV_R_BOT_OHM) / BATT_DIV_R_BOT_OHM;
 }
 
+
+#ifdef BATTERY_HOST_TEST
+#include "mock_adc.h"
+
 static bool adc_sample(float *avg_counts)
 {
-    uint32_t sum = 0;
-    for (int i = 0; i < BATT_ADC_OVERSAMPLE; i++) {
-        if (HAL_ADC_Start(&hadc1) != HAL_OK) return false;
-        if (HAL_ADC_PollForConversion(&hadc1, 2) != HAL_OK) {
+    uint32_t sum = 0U;
+    uint16_t sample;
+
+    for (uint32_t i = 0U; i < BATT_ADC_OVERSAMPLE; i++)
+    {
+        if (!mock_adc_read(&sample))
+        {
+            return false;
+        }
+
+        sum += sample;
+    }
+
+    *avg_counts = (float)sum / (float)BATT_ADC_OVERSAMPLE;
+    return true;
+}
+
+#else
+
+static bool adc_sample(float *avg_counts)
+{
+    uint32_t sum = 0U;
+
+    for (int i = 0; i < BATT_ADC_OVERSAMPLE; i++)
+    {
+        if (HAL_ADC_Start(&hadc1) != HAL_OK)
+            return false;
+
+        if (HAL_ADC_PollForConversion(&hadc1, 2) != HAL_OK)
+        {
             HAL_ADC_Stop(&hadc1);
             return false;
         }
+
         sum += HAL_ADC_GetValue(&hadc1);
         HAL_ADC_Stop(&hadc1);
     }
+
     *avg_counts = (float)sum / BATT_ADC_OVERSAMPLE;
     return true;
 }
+#endif
 
 static batt_level_t classify(float cell_v, batt_level_t prev)
 {
