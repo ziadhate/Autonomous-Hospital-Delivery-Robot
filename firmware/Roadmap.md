@@ -155,22 +155,22 @@ Implement and validate the low-level drivers required to access STM32 peripheral
 
 ### UART
 
-- [ ] Configure baud rate and frame settings.
-- [ ] Implement transmission and reception.
-- [ ] Define timeout and error-handling behavior.
+- [x] Configure baud rate and frame settings.
+- [x] Implement transmission and reception.
+- [x] Define timeout and error-handling behavior.
 
 ### ADC
 
-- [ ] Configure ADC channels.
-- [ ] Implement conversion and data retrieval.
-- [ ] Validate measurement ranges and scaling.
+- [x] Configure ADC channels.
+- [x] Implement conversion and data retrieval.
+- [x] Validate measurement ranges and scaling.
 
 ### I2C and SPI
 
-- [ ] Configure bus timing and operating modes.
-- [ ] Implement transfer interfaces.
-- [ ] Define timeout and error handling.
-- [ ] Verify compatibility with the selected peripherals.
+- [x] Configure bus timing and operating modes.
+- [x] Implement transfer interfaces.
+- [x] Define timeout and error handling.
+- [x] Verify compatibility with the selected peripherals.
 
 ## Testing and Validation
 
